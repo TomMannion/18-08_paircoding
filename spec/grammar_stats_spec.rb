@@ -24,5 +24,12 @@ describe  GrammarStats do
     stats.check("this does work again.")
     expect(stats.percentage_good).to eq 25
   end
-  
+
+  it "Checks the pass percentage of tests completed" do
+    stats = GrammarStats.new
+    stats.check("This does work.")
+    stats.check("This does not work")
+    stats.check("this does work again.")
+    expect(stats.percentage_good).to eq 33
+  end
 end

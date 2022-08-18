@@ -1,15 +1,21 @@
 class GrammarStats
   def initialize
-    # ...
+    @checked = { :true_checked => 0, :false_checked => 0 }
   end
 
   def check(text) 
-    return text[0].match?(/[A-Z]/) && text[-1].match?(/[!.?]/)
-
+    if text[0].match?(/[A-Z]/) && text[-1].match?(/[!.?]/)
+      @checked[:true_checked] += 1
+      return true
+    else 
+      @checked[:false_checked] += 1
+      return false
+    end
   end
 
   def percentage_good
-    # Returns as an integer the percentage of texts checked so far that passed
-    # the check defined in the `check` method. The number 55 represents 55%.
+    total = @checked[:true_checked] + @checked[:false_checked]
+    percentage = (@checked[:true_checked] / total.to_f) * 100 
+    return percentage.to_i
   end
 end
